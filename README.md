@@ -67,9 +67,9 @@ nohup
 /path/to/Rscript                                                       # insert path to the Rscript                                                                             
 --magma </path/to/magma-executable>                                    # insert path to magma executable                                                                         
 --sumstat </path/to/summary-statistics-file>                           # ./tutorial/input/sumstats/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt                     
---sumstat-id [column index of column containing rs-identifier]         # 2                                                                                   
---sumstat-pval [column index of column containing p-value]             # 10                                                                                  
---sumstat-nsample [column index of column containing sample size]      # 11                                                                                   
+--sumstat-id <column index of column containing rs-identifier>         # 2                                                                                   
+--sumstat-pval <column index of column containing p-value>             # 10                                                                                  
+--sumstat-nsample <column index of column containing sample size>      # 11                                                                                   
 --binaries </path/to/binaries/prefix>                                  # ./tutorial/input/binaries/g1000_eur                                                                     
 --baseline-model </path/to/annotations/baseline-prefix.genes.annot>    # ./tutorial/input/annotations/baseline-prefix.genes.annot                                               
 --augmented-model </path/to/annotations/augmented-prefix.genes.annot>  # ./tutorial/input/annotations/augmented-prefix.genes.annot                                               
