@@ -31,13 +31,17 @@ random augmentation, and we implement such a control (EPVP, see our publication 
 - A gene-set file (for examples, refer to: http://www.gsea-msigdb.org/gsea/downloads.jsp)
 
 # Installation
-Simply save the Rscript (EPM-MAGMA.R) into a directory of your choice.
+- Simply save the Rscript (EPM-MAGMA.R) into a directory of your choice.
+- Create an empty working directory with an "input" and an "output" subdirectory. The input subdirectory should contain five more subdirectories, as follows: 
+  "annotations" (for gene locations and SNV-to-gene mappings), "binaries" (for a set of binary files), "miscellaneous" (for an optional text file containing 
+  a list of genes to exclude from the analyses), "sets" (for a gene-set file), and "sumstats" (for a GWAS summary statistics file).  
 
 # Tutorial
 We recommend the following tutorial for first-time use in order to confirm that everything is running as it should. Let us examine the effect of 
-incorporating 10kb flanks on-top-of gene bodies in the context of a gene-set analysis for coronary-artery disease GWAS summary statistics.
-- Download GWAS summary statistics for coronary-artery disease: http://www.cardiogramplusc4d.org/media/cardiogramplusc4d-consortium/data-downloads/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt.gz
-- 
+incorporating 10kb flanks on-top-of gene bodies in the context of a gene-set analysis for coronary-artery disease GWAS summary statistics. Create the 
+directory structure as described above (under the installation heading). Name the working directory "tutorial".
+- Download GWAS summary statistics for coronary-artery disease into ./tutorial/input/sumstats/: http://www.cardiogramplusc4d.org/media/cardiogramplusc4d-consortium/data-downloads/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt.gz
+- Download the gene locations file from the MAGMA website for human genome build GRCh37 into ./tutorial/input/annotations/: https://ctg.cncr.nl/software/MAGMA/aux_files/NCBI37.3.zip
 
 
 
