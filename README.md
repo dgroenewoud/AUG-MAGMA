@@ -50,12 +50,35 @@ We first build two SNV-to-gene mappings. The baseline SNV-to-gene mapping assign
 mapping assigns SNVs to genes based on overlap with gene bodies or 10kb flanks. Please refer to our publication for instructions on how to build custom SNV-to-gene
 mappings such as mappings that incorporate regulatory interactions.
 
-Enter the ./tutorial/input/annotations/ directory and execute the following command (where X and Y represent the flank size in kb) twice (that is, once for X and Y both set to 0 and once for X and Y both set to 10):                                                                                                                                           
-</path/to/magma>                                       # insert path to magma executable                                                                                         
+Enter the ./tutorial/input/annotations/ directory and execute the following command (where X and Y represent the flank size in kb) twice (that is, once for X and Y both set to 0, and once for X and Y both set to 10):                                                                                                                                        
+
+</path/to/magma-executable>                            # insert path to magma executable                                                                                         
 --annotate  window=X,Y                                 # to exclude flanks either set X and Y to 0 or do not add the "window=X,Y" modifier at all                               
 --snp-loc   </path/to/binaries/prefix.bim>             # ./tutorial/input/binaries/g1000_eur.bim                                                                                 
 --gene-loc  </path/to/annotations/gene.loc.file>       # ./tutorial/input/annotations/NCBI37.3.gene.loc                                                                         
---out       </path/to/annotations/genes_uXdY>          # ./tutorial/input/annotations/genes_u10d10
+--out       </path/to/annotations/genes_uXdY>          # ./tutorial/input/annotations/genes_uXdY
+
+We then run the Rscript. The duration of the entire process depends on several variables (such as the number of cores used for parallel execution, the number 
+of permutations requested, properties of the summary statistics and the mappings themselves, and so forth) but is usually no more than 12 hours. The Rscript
+is executed from the linux command line and requires several inputs. The most basic command is as follows:
+
+nohup                                                                                                                                                                           
+/path/to/R/interpeter                                                  # insert path to the R interpreter                                                                       
+/path/to/Rscript                                                       # insert path to the Rscript                                                                             
+--magma </path/to/magma-executable>                                    # insert path to magma executable                                                                         
+--sumstat </path/to/summary-statistics-file>                           # ./tutorial/input/sumstats/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt                     
+--sumstat-id [column index of column containing rs-identifier]         # 2                                                                                   
+--sumstat-pval [column index of column containing p-value]             # 10                                                                                  
+--sumstat-nsample [column index of column containing sample size]      # 11                                                                                   
+--binaries </path/to/binaries/prefix>                                  # ./tutorial/input/binaries/g1000_eur                                                                     
+--baseline-model </path/to/annotations/baseline-prefix.genes.annot>    # ./tutorial/input/annotations/baseline-prefix.genes.annot                                               
+--augmented-model </path/to/annotations/augmented-prefix.genes.annot>  # ./tutorial/input/annotations/augmented-prefix.genes.annot                                               
+--gene-set-file </path/to/gene-set-file>                               # ./tutorial/input/sets/c5.go.bp.v7.4.entrez.gmt                                                         
+--output </path/to/output/directory/>                                  # ./tutorial/output/                                                                                     
+&
+
+
+
 
 
 
