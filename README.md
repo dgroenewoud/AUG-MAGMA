@@ -1,6 +1,8 @@
 # EPM-MAGMA
 Incorporating regulatory interactions into gene-set analyses for GWAS data
 
+When using our approach, we request that you reference our publication as well:
+
 # Background
 We provide an Rscript to execute gene scoring and gene-set analysis with MAGMA with the aim of comparing between a baseline SNV-to-gene mapping and
 an augmented SNV-to-gene mapping. A baseline SNV-to-gene mapping is a minimal SNV-to-gene mapping (e.g., assign SNVs to a gene if they overlap with
@@ -38,6 +40,10 @@ random augmentation, and we implement such a control (EPVP, see our publication 
   "annotations" (for gene locations and SNV-to-gene mappings), "binaries" (for a set of binary files), "miscellaneous" (for an optional text file containing 
   a list of genes to exclude from the analyses), "sets" (for a gene-set file), and "sumstats" (for a GWAS summary statistics file). Note that the only real
   requirement is to have an empty working directory and within it an empty output directory (that is, the input directory is purely for convenience).
+
+# Recommendation
+Users should be familiar with MAGMA and we recommend that they refer to the MAGMA manual for additional details. The manual can be downloaded from
+the MAGMA website (https://ctg.cncr.nl/software/magma).
 
 # Tutorial
 Stage 1. We recommend the following tutorial for first-time use in order to confirm that everything is running as it should. Let us examine the effect of 
