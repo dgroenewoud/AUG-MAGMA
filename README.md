@@ -31,7 +31,13 @@ random augmentation, and we implement such a control (EPVP, see our publication 
 - A gene-set file (for examples, refer to: http://www.gsea-msigdb.org/gsea/downloads.jsp)
 
 # Installation
+Simply save the Rscript (EPM-MAGMA.R) into a directory of your choice.
 
+# Tutorial
+We recommend the following tutorial for first-time use in order to confirm that everything is running as it should. Let us examine the effect of 
+incorporating 10kb flanks on-top-of gene bodies in the context of a gene-set analysis for coronary-artery disease GWAS summary statistics.
+- Download GWAS summary statistics for coronary-artery disease: http://www.cardiogramplusc4d.org/media/cardiogramplusc4d-consortium/data-downloads/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt.gz
+- 
 
 
 
