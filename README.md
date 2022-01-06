@@ -50,7 +50,12 @@ We first build two SNV-to-gene mappings. The baseline SNV-to-gene mapping assign
 mapping assigns SNVs to genes based on overlap with gene bodies or 10kb flanks. Please refer to our publication for instructions on how to build custom SNV-to-gene
 mappings such as mappings that incorporate regulatory interactions.
 
-
+Enter the ./tutorial/input/annotations/ directory and execute the following command (where X and Y represent the flank size in kb) twice (that is, once for X and Y both set to 0 and once for X and Y both set to 10):                                                                                                                                           
+</path/to/magma>                                       # insert path to magma executable                                                                                         
+--annotate  window=X,Y                                 # to exclude flanks either set X and Y to 0 or do not add the "window=X,Y" modifier at all                               
+--snp-loc   </path/to/binaries/prefix.bim>             # ./tutorial/input/binaries/g1000_eur.bim                                                                                 
+--gene-loc  </path/to/annotations/gene.loc.file>       # ./tutorial/input/annotations/NCBI37.3.gene.loc                                                                         
+--out       </path/to/annotations/genes_uXdY>          # ./tutorial/input/annotations/genes_u10d10
 
 
 
