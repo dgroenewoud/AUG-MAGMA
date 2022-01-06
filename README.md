@@ -38,25 +38,37 @@ random augmentation, and we implement such a control (EPVP, see our publication 
   requirement is to have an empty working directory and within it an empty output directory (that is, the input directory is purely for convenience).
 
 # Tutorial
-We recommend the following tutorial for first-time use in order to confirm that everything is running as it should. Let us examine the effect of 
+Stage 1. We recommend the following tutorial for first-time use in order to confirm that everything is running as it should. Let us examine the effect of 
 incorporating 10kb flanks on-top-of gene bodies in the context of a gene-set analysis for coronary-artery disease GWAS summary statistics. Create the 
 directory structure as described above (second bullet point under the installation heading). Name the working directory "tutorial".
 - Download and unzip the gene locations file from the MAGMA website for human genome build GRCh37 into ./tutorial/input/annotations/: https://ctg.cncr.nl/software/MAGMA/aux_files/NCBI37.3.zip
 - Download and unzip the relevant set of binary files (note, this tutorial concerns a GWAS study performed in a European population) into ./tutorial/input/binaries/: https://ctg.cncr.nl/software/MAGMA/ref_data/g1000_eur.zip
 - Download a gene-set file (note, since in this case the gene locations file uses entrez identifiers, we should use a gene-set file that likewise uses entrez identifiers) into ./tutorial/input/sets/: http://www.gsea-msigdb.org/gsea/msigdb/download_file.jsp?filePath=/msigdb/release/7.4/c5.go.bp.v7.4.entrez.gmt
-- Download and gunzip GWAS summary statistics for coronary-artery disease into ./tutorial/input/sumstats/: http://www.cardiogramplusc4d.org/media/cardiogramplusc4d-consortium/data-downloads/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt.gz
+- Download and gunzip GWAS summary statistics for coronary-artery disease into ./tutorial/input/sumstats/: http://www.cardiogramplusc4d.org/media/cardiogramplusc4d-consortium/data-downloads/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt.gz (note: rename the summary statistics file to cartery_disease.txt)
 
-We first build two SNV-to-gene mappings. The baseline SNV-to-gene mapping assigns SNVs to genes based on overlap with gene bodies only. The augmented SNV-to-gene 
-mapping assigns SNVs to genes based on overlap with gene bodies or 10kb flanks. Please refer to our publication for instructions on how to build custom SNV-to-gene
-mappings such as mappings that incorporate regulatory interactions.
+Stage 2. We first build two SNV-to-gene mappings. The baseline SNV-to-gene mapping assigns SNVs to genes based on overlap with gene bodies only. The augmented 
+SNV-to-gene mapping assigns SNVs to genes based on overlap with gene bodies or 10kb flanks. Refer to our publication for instructions on how to build 
+custom SNV-to-gene mappings such as mappings that incorporate regulatory interactions. For this tutorial, we can simply use the following command to 
+build first the baseline SNV-to-gene mapping and then the augmented SNV-to-gene mapping (note: X and Y represent the upstream and downstream flank size 
+in kb, respectively):
 
-Enter the ./tutorial/input/annotations/ directory and execute the following command (where X and Y represent the flank size in kb) twice (that is, once for X and Y both set to 0, and once for X and Y both set to 10):                                                                                                                                        
+</path/to/magma-executable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# insert path to magma executable <br />
+--annotate <window=X,Y>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# set X and Y to 0 for the baseline mapping and to 10 for the augmented mapping <br /> 
+--snp-loc   </path/to/binaries/prefix.bim>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# use ./tutorial/input/binaries/g1000_eur.bim <br /> 
+--gene-loc  </path/to/annotations/gene.loc.file>&nbsp;&nbsp;&nbsp;# use ./tutorial/input/annotations/NCBI37.3.gene.loc <br />
+--out       </path/to/annotations/genes_uXdY>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# use ./tutorial/input/annotations/genes_uXdY
 
-</path/to/magma-executable>                            # insert path to magma executable                                                                                         
---annotate  window=X,Y                                 # to exclude flanks either set X and Y to 0 or do not add the "window=X,Y" modifier at all                               
---snp-loc   </path/to/binaries/prefix.bim>             # ./tutorial/input/binaries/g1000_eur.bim                                                                                 
---gene-loc  </path/to/annotations/gene.loc.file>       # ./tutorial/input/annotations/NCBI37.3.gene.loc                                                                         
---out       </path/to/annotations/genes_uXdY>          # ./tutorial/input/annotations/genes_uXdY
+Stage 3. We are now ready to run the Rscript. The entire process usually takes no more than 12 hours to complete. We execute the process in 
+the linux command line. The essential command is:
+
+
+
+
+
+
+
+
+
 
 We then run the Rscript. The duration of the entire process depends on several variables (such as the number of cores used for parallel execution, the number 
 of permutations requested, properties of the summary statistics and the mappings themselves, and so forth) but is usually no more than 12 hours. The Rscript
