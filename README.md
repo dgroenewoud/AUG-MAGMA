@@ -109,8 +109,9 @@ Run time varies but will usually not exceed 12 hours. Progress can be monitored 
 under a subdirectory named (1) after the summary statistics file and then (2) an additional subdirectory named after the augmented SNV-to-gene mapping file. At 
 the bottom of this directory structure are three subdirectories: 
 
-The "annotation" subdirectory contains a table in which each each gene is defined by SNVs mapped to it either exclusively via augmentatio (a) or via both mappings
-(b). This serves as a reference for the one running the analysis.
+The "annotation" subdirectory contains a table in which each each gene is defined by SNVs mapped to it either exclusively via augmentation (a, that is a for 
+augmentation) or via both mappings (b, that is b for baseline, since the SNV is already mapped to the gene via the minimal mapping). This file serves as a reference 
+for any downstream analyses that the user may wish to perform.
 
 The "scores" subdirectory contains gene scores and gene-set scores according to the baseline SNV-to-gene mapping with unpermuted summary statistics ("baseline"), 
 the augmented SNV-to-gene mapping with unpermuted summary statistics ("augmented"), and the augmented SNV-to-gene mapping with permuted (EPVP) summary statistics 
