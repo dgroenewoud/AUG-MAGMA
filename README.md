@@ -52,7 +52,7 @@ a gene-set file), and "sumstats" (for a GWAS summary statistics file).
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sumstats/<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output/<br />
 
-# Tutorial and Inputs/Flags
+# Tutorial
 Stage 1. We recommend this tutorial for first-time users to confirm that everything is running as it should. Let's examine the effect of incorporating 10kb 
 flanks on-top-of gene bodies in the context of a gene-set analysis for coronary-artery disease GWAS summary statistics. Create the directory structure as described 
 above (under the installation heading). Name the working directory "tutorial".
@@ -74,16 +74,20 @@ SNV-to-gene mapping and then the augmented SNV-to-gene mapping.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--gene-loc </path/to/annotations/gene.loc.file>&nbsp;&nbsp;&nbsp;# define path to gene locations file<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--out </path/to/annotations/genes_uXdY>&nbsp;&nbsp;&nbsp;# define path and name of output file<br />
 
-Stage 3. Run the Rscript from the linux command-line. A typical run takes no more than 12 hours to complete. 
+Stage 3. Run the Rscript from the linux command-line (see below).
+
+# Running AUG-MAGMA
+
+To run AUG-MAGMA, use the following general command in the command line:
 
 nohup<br />
 </path/to/R-interpreter>&nbsp;&nbsp;&nbsp;# define path to R interpreter<br />
 </path/to/Rscript>&nbsp;&nbsp;&nbsp;# define path to Rscript for execution<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--magma </path/to/magma-executable>&nbsp;&nbsp;&nbsp;# define path to magma executable<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat </path/to/summary-statistics-file>&nbsp;&nbsp;&nbsp;# define path to summary statistics file<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-id Q&nbsp;&nbsp;&nbsp;# Q is column index of column containing rs-identifier (in this case, 2)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-pval W&nbsp;&nbsp;&nbsp;# W is column index of column containing p-value (in this case, 10)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-nsample R&nbsp;&nbsp;&nbsp;# R is column index of column containing sample size (in this case, 11)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-id Q&nbsp;&nbsp;&nbsp;# Q is column index of column containing rs-identifier<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-pval W&nbsp;&nbsp;&nbsp;# W is column index of column containing p-value<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-nsample R&nbsp;&nbsp;&nbsp;# R is column index of column containing sample size<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--binaries </path/to/binaries/prefix>&nbsp;&nbsp;&nbsp;# define path to the set of binary files including their common prefix<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--baseline-model </path/to/annotations/baseline-prefix.genes.annot>&nbsp;&nbsp;&nbsp;# define path to baseline SNV-to-gene mapping<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--augmented-model </path/to/annotations/augmented-prefix.genes.annot>&nbsp;&nbsp;&nbsp;# define path to augmented SNV-to-gene mapping<br />
@@ -93,7 +97,7 @@ nohup<br />
 
 Optional flags *include*:
 
---cores V&nbsp;&nbsp;&nbsp;# set number of cores V manually (not recommended | default is a quarter of total available cores)<br />
+--cores V&nbsp;&nbsp;&nbsp;# set number of cores V manually (not recommended to exceed default | default is a quarter of total available cores)<br />
 --gene-scoring-model top&nbsp;&nbsp;&nbsp;# change the way MAGMA calculates gene scores (not recommended | default is SNP-Wise Mean)<br /> 
 --gene-set-format col=A,B&nbsp;&nbsp;&nbsp;# use alt. gene-set format (see MAGMA manual | A/B are index of gene/set column | default is row-based)<br />
 --ignore-genes </path/to/gene-list-file>&nbsp;&nbsp;&nbsp;# define path list of genes to exclude from analyses (see MAGMA manual | default is none)<br />
