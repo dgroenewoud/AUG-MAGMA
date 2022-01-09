@@ -1,18 +1,15 @@
-# EPM-MAGMA
-Incorporating regulatory interactions into gene-set analyses for GWAS data
+# AUG-MAGMA
+A controlled approach for incorporating regulatory interactions into gene-set analyses for GWAS data
 
-When using our approach, we request that you reference our publication as well:
+When using our approach, we ask that you reference our publication as well:
 
 # Background
-We provide an Rscript to execute gene scoring and gene-set analysis with MAGMA with the aim of comparing between a baseline SNV-to-gene mapping and
-an augmented SNV-to-gene mapping. A baseline SNV-to-gene mapping is a minimal SNV-to-gene mapping (e.g., assign SNVs to a gene if they overlap with
-the gene body). An augmented SNV-to-gene mapping is built on-top-of a baseline SNV-to-gene mapping (e.g., assign additional SNVs to a gene if they 
-are located either within 10kb upstream of the transcription start-site or 10kb downstream of the transcription end-site). MAGMA (a popular gene-set
-analysis tool for GWAS data: https://doi.org/10.1371/journal.pcbi.1004219) is then used to calculate gene scores based on SNV-level associations (from 
-GWAS summary statistics) amongst SNVs mapped to each gene. These gene scores are then fed into a competitive gene-set analysis to identify collections
-of genes that are enriched for phenotype association. Gene scores and gene-set scores can be compared between both mappings to evaluate the benefits
-of augmentation. We demonstrated that, in order to limit spurious discoveries, it is important to control such comparative analyses with matched, 
-random augmentation, and we implement such a control (EPVP, see our publication for details) in this Rscript.
+We provide an Rscript to execute gene scoring and gene-set analysis with MAGMA with the specific aim of comparing between a baseline SNV-to-gene mapping (that 
+is, a minimal SNV-to-gene mapping) and an augmented SNV-to-gene mapping (that is, a SNV-to-gene mapping that is built on-top-of a baseline SNV-to-gene mapping). 
+For each mapping, MAGMA (a popular gene-set analysis tool for GWAS data: https://doi.org/10.1371/journal.pcbi.1004219) is used to calculate gene scores based on 
+SNV-level associations (from GWAS summary statistics) amongst SNVs mapped to each gene. These gene scores are then fed into a competitive gene-set analysis to 
+identify collections of genes that are enriched for phenotype association. Gene scores and gene-set scores can be compared between both mappings to evaluate 
+the benefits of augmentation. To limit spurious discoveries, we control for non-specific effects with matched, random augmentation (see publication for details).
 
 # Requirements
 - Access to a linux server
@@ -24,22 +21,31 @@ random augmentation, and we implement such a control (EPVP, see our publication 
 - A data set of GWAS summary statistics containing:
   (i) an identifier column with rs identifiers
   (ii) a p-value column
-  (iii) a sample-size column (if not provided, set this to the study sample-size for every entry)
+  (iii) a sample-size column (if not provided, set this manually to the study sample-size for every entry)
 - A relevant data set of binary files (refer to: https://ctg.cncr.nl/software/magma)
   (i) choose the appropriate population with respect to the GWAS study being analyzed
-  (ii) it is possible to use custom binary files
+  (ii) it is possible to use custom binary files with MAGMA at your own risk
 - A gene locations file for building SNV-to-gene mappings (refer to: https://ctg.cncr.nl/software/magma):
   (i) ensure that the genome build matches the binary files
-  (ii) it is possible to use a custom gene locations file
-  (iii) it is also possible to avoid this file completely and to build your own SNV-to-gene mappings (however, this is not implemented in our Rscript)
+  (ii) it is possible to use a custom gene locations file with MAGMA at your own risk
+  (iii) it is also possible to avoid this file completely and to build your own SNV-to-gene mappings directly (however, we currently do not implement this)
 - A gene-set file (for examples, refer to: http://www.gsea-msigdb.org/gsea/downloads.jsp)
 
 # Installation
-- Simply save the Rscript (EPM-MAGMA.R) into a directory of your choice.
-- Create an empty working directory with an "input" and an "output" subdirectory. The "input" subdirectory should contain five more subdirectories, as follows: 
-  "annotations" (for gene locations and SNV-to-gene mappings), "binaries" (for a set of binary files), "miscellaneous" (for an optional text file containing 
-  a list of genes to exclude from the analyses), "sets" (for a gene-set file), and "sumstats" (for a GWAS summary statistics file). Note that the only real
-  requirement is to have an empty working directory and within it an empty output directory (that is, the input directory is purely for convenience).
+- Simply save the Rscript (AUG-MAGMA.R) into any directory of your choice.
+- Create an empty working directory and within it an empty subdirectory called "output". For convenience, we also recommend that you create a subdirectory called
+  "input" (that is, within the working directory), and that you then create five subdirectories within the "input" subdirectory, namely: "annotations" (for gene 
+  locations and SNV-to-gene mappings), "binaries" (for a set of binary files), "miscellaneous" (for an optional text file containing a list of genes to exclude 
+  from the analyses), "sets" (for a gene-set file), and "sumstats" (for a GWAS summary statistics file). 
+  
+  ./workdir/
+           input/
+                annotations/
+                binaries/
+                miscellaneous/
+                sets/
+                sumstats/
+           output/
 
 # Recommendation
 Users should be familiar with MAGMA and we recommend that they refer to the MAGMA manual for additional details. The manual can be downloaded from
