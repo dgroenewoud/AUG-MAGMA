@@ -52,56 +52,52 @@ a gene-set file), and "sumstats" (for a GWAS summary statistics file).
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sumstats/<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output/<br />
 
-# Tutorial
-Stage 1. We recommend the following tutorial for first-time use in order to confirm that everything is running as it should. Let us examine the effect of 
-incorporating 10kb flanks on-top-of gene bodies in the context of a gene-set analysis for coronary-artery disease GWAS summary statistics. Create the 
-directory structure as described above (second bullet point under the installation heading). Name the working directory "tutorial".
-- Download and unzip the gene locations file from the MAGMA website for human genome build GRCh37 into ./tutorial/input/annotations/: https://ctg.cncr.nl/software/MAGMA/aux_files/NCBI37.3.zip
-- Download and unzip the relevant set of binary files (note, this tutorial concerns a GWAS study performed in a European population) into ./tutorial/input/binaries/: https://ctg.cncr.nl/software/MAGMA/ref_data/g1000_eur.zip
-- Download a gene-set file (note, since in this case the gene locations file uses entrez identifiers, we should use a gene-set file that likewise uses entrez identifiers) into ./tutorial/input/sets/: http://www.gsea-msigdb.org/gsea/msigdb/download_file.jsp?filePath=/msigdb/release/7.4/c5.go.bp.v7.4.entrez.gmt
-- Download and gunzip GWAS summary statistics for coronary-artery disease into ./tutorial/input/sumstats/: http://www.cardiogramplusc4d.org/media/cardiogramplusc4d-consortium/data-downloads/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt.gz 
-- WARNING: Rename the GWAS summary statistics file (e.g. cartery-disease.txt). The file name cannot contain a full-stop, which is reserved as a delimiter for between the
+# Tutorial and Inputs/Flags
+Stage 1. We recommend this tutorial for first-time users to confirm that everything is running as it should. Let's examine the effect of incorporating 10kb 
+flanks on-top-of gene bodies in the context of a gene-set analysis for coronary-artery disease GWAS summary statistics. Create the directory structure as described 
+above (under the installation heading). Name the working directory "tutorial".
+- "Download" and "unzip" the gene locations file from the MAGMA website for human genome build GRCh37 into ./tutorial/input/annotations/: https://ctg.cncr.nl/software/MAGMA/aux_files/NCBI37.3.zip
+- "Download" and "unzip" the relevant set of binary files (note, this tutorial concerns a GWAS study performed in a European population) into ./tutorial/input/binaries/: https://ctg.cncr.nl/software/MAGMA/ref_data/g1000_eur.zip
+- "Download" a gene-set file (note: since in this tutorial our gene locations file is using entrez identifiers, we should ensure that our gene-set files also uses entrez identifiers) into ./tutorial/input/sets/: http://www.gsea-msigdb.org/gsea/msigdb/download_file.jsp?filePath=/msigdb/release/7.4/c5.go.bp.v7.4.entrez.gmt
+- "Download" and "gunzip" GWAS summary statistics for coronary-artery disease into ./tutorial/input/sumstats/: http://www.cardiogramplusc4d.org/media/cardiogramplusc4d-consortium/data-downloads/UKBB.GWAS1KG.EXOME.CAD.SOFT.META.PublicRelease.300517.txt.gz 
+- "Rename" the GWAS summary statistics file (e.g. cartery-disease.txt). The file name cannot contain a full-stop. The full-stop is reserved as a delimiter for between the
 file name and the file suffix. 
 
-Stage 2. We first build two SNV-to-gene mappings. The baseline SNV-to-gene mapping assigns SNVs to genes based on overlap with gene bodies only. The 
-augmented SNV-to-gene mapping assigns SNVs to genes based on overlap with gene bodies or 10kb flanks. Refer to our publication for instructions on how 
-to build custom SNV-to-gene mappings such as mappings that incorporate regulatory interactions. 
-
-For this tutorial, we can simply use the following command to first build the baseline SNV-to-gene mapping and then to build the augmented SNV-to-gene 
-mapping (note: X and Y represent the upstream and downstream flank size in kb, respectively):
+Stage 2. Build two SNV-to-gene mappings. The baseline SNV-to-gene mapping assigns SNVs to genes based on overlap with gene bodies. The augmented SNV-to-gene
+mapping assigns SNVs to genes based on overlap with either gene bodies or 10kb flanks. Our publication describes how to build custom SNV-to-gene mappings 
+such as mappings that incorporate regulatory interactions. However, for this tutorial we can use the following general command to first build the baseline
+SNV-to-gene mapping and then the augmented SNV-to-gene mapping.
 
 </path/to/magma-executable>&nbsp;&nbsp;&nbsp;# define path to magma executable<br />
---annotate window=X,Y&nbsp;&nbsp;&nbsp;# define upstream (X) and downstream (Y) flank-size in kb<br />
---snp-loc </path/to/binaries/prefix.bim>&nbsp;&nbsp;&nbsp;# define path to .bim file (one of the binary files)<br />
---gene-loc </path/to/annotations/gene.loc.file>&nbsp;&nbsp;&nbsp;# define path to gene locations file<br />
---out </path/to/annotations/genes_uXdY>&nbsp;&nbsp;&nbsp;# define path and name of output file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--annotate window=X,Y&nbsp;&nbsp;&nbsp;# define upstream (X) and downstream (Y) flank-size in kb<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--snp-loc </path/to/binaries/prefix.bim>&nbsp;&nbsp;&nbsp;# define path to .bim file (one of the binary files)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--gene-loc </path/to/annotations/gene.loc.file>&nbsp;&nbsp;&nbsp;# define path to gene locations file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--out </path/to/annotations/genes_uXdY>&nbsp;&nbsp;&nbsp;# define path and name of output file<br />
 
-Stage 3. We are now ready to run the Rscript. The entire process usually takes no more than 12 hours to complete. 
-
-We execute the Rscript from the linux command line. The basic command is:
+Stage 3. Run the Rscript from the linux command-line. A typical run takes no more than 12 hours to complete. 
 
 nohup<br />
 </path/to/R-interpreter>&nbsp;&nbsp;&nbsp;# define path to R interpreter<br />
 </path/to/Rscript>&nbsp;&nbsp;&nbsp;# define path to Rscript for execution<br />
---magma </path/to/magma-executable>&nbsp;&nbsp;&nbsp;# define path to magma executable<br />
---sumstat </path/to/summary-statistics-file>&nbsp;&nbsp;&nbsp;# define path to summary statistics file<br />
---sumstat-id Q&nbsp;&nbsp;&nbsp;# Q is column index of column containing rs-identifier<br />
---sumstat-pval W&nbsp;&nbsp;&nbsp;# W is column index of column containing p-value<br />
---sumstat-nsample R&nbsp;&nbsp;&nbsp;# R is column index of column containing sample size<br />
---binaries </path/to/binaries/prefix>&nbsp;&nbsp;&nbsp;# define path to binary files including common prefix<br />
---baseline-model </path/to/annotations/baseline-prefix.genes.annot>&nbsp;&nbsp;&nbsp;# define path to baseline SNV-to-gene mapping<br />
---augmented-model </path/to/annotations/augmented-prefix.genes.annot>&nbsp;&nbsp;&nbsp;# define path to augmented SNV-to-gene mapping<br />
---gene-set-file </path/to/gene-set-file>&nbsp;&nbsp;&nbsp;# define path to gene-set file<br />
---output </path/to/output>&nbsp;&nbsp;&nbsp;# define directory for storing output<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--magma </path/to/magma-executable>&nbsp;&nbsp;&nbsp;# define path to magma executable<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat </path/to/summary-statistics-file>&nbsp;&nbsp;&nbsp;# define path to summary statistics file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-id Q&nbsp;&nbsp;&nbsp;# Q is column index of column containing rs-identifier (in this case, 2)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-pval W&nbsp;&nbsp;&nbsp;# W is column index of column containing p-value (in this case, 10)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--sumstat-nsample R&nbsp;&nbsp;&nbsp;# R is column index of column containing sample size (in this case, 11)<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--binaries </path/to/binaries/prefix>&nbsp;&nbsp;&nbsp;# define path to the set of binary files including their common prefix<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--baseline-model </path/to/annotations/baseline-prefix.genes.annot>&nbsp;&nbsp;&nbsp;# define path to baseline SNV-to-gene mapping<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--augmented-model </path/to/annotations/augmented-prefix.genes.annot>&nbsp;&nbsp;&nbsp;# define path to augmented SNV-to-gene mapping<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--gene-set-file </path/to/gene-set-file>&nbsp;&nbsp;&nbsp;# define path to gene-set file<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--output </path/to/output>&nbsp;&nbsp;&nbsp;# define directory for storing output<br />
 &<br />
 
-Optional flags include:
+Optional flags *include*:
 
---cores V&nbsp;&nbsp;&nbsp;# set number of cores V manually (not recommended)<br />
---gene-scoring-model top&nbsp;&nbsp;&nbsp;# this changes the way MAGMA calculates gene scores (not recommended)<br /> 
---gene-set-format col=A,B&nbsp;&nbsp;&nbsp;# A is index of gene column and B is index of set column (alternative gene-set file format)<br />
---ignore-genes </path/to/gene-list-file>&nbsp;&nbsp;&nbsp;# define path to file containing list of genes to exclude from analyses<br />
---permutations P&nbsp;&nbsp;&nbsp;# set number of permutations P manually<br />
+--cores V&nbsp;&nbsp;&nbsp;# set number of cores V manually (not recommended | default is a quarter of total available cores)<br />
+--gene-scoring-model top&nbsp;&nbsp;&nbsp;# change the way MAGMA calculates gene scores (not recommended | default is SNP-Wise Mean)<br /> 
+--gene-set-format col=A,B&nbsp;&nbsp;&nbsp;# use alt. gene-set format (see MAGMA manual | A/B are index of gene/set column | default is row-based)<br />
+--ignore-genes </path/to/gene-list-file>&nbsp;&nbsp;&nbsp;# define path list of genes to exclude from analyses (see MAGMA manual | default is none)<br />
+--permutations P&nbsp;&nbsp;&nbsp;# set number of permutations P manually (default is 20)<br />
 
 
 
