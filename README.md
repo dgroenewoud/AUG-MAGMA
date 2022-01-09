@@ -103,17 +103,28 @@ Optional flags *include*:
 --ignore-genes </path/to/gene-list-file>&nbsp;&nbsp;&nbsp;# define path list of genes to exclude from analyses (see MAGMA manual | default is none)<br />
 --permutations P&nbsp;&nbsp;&nbsp;# set number of permutations P manually (default is 20)<br />
 
+# General Description
+
+1. Summary statistics are read-in and preprocessed for compatibility with MAGMA and EPVP.
+2. Both SNV-to-gene mappings are read-in and are used to generate an annotation table (that is, a table in which each each gene is defined by SNVs mapped to it either exclusively via augmentation (a) or alternatively via both mappings (b)). 
+3. Gene scoring (to obtain unadjusted gene scores) and gene-set analysis (to obtain adjusted gene scores that in turn are used to obtain gene set scores) are performed for the baseline SNV-to-gene mapping and then for the augmented SNV-to-gene mapping using the unpermuted summary statistics (that is, the output from step 1).
+4. EPVP permutations are executed and used to obtain an unadjusted gene score for each gene for each permutation, data which in turn are used in gene-set analysis to obtain adjusted gene scores and gene set scores for each permutation.
+
 # Output
 
 Run time varies but will usually not exceed 12 hours. Progress can be monitored in the nohup.out file. All output is stored in the specified output directory
 under a subdirectory named (1) after the summary statistics file and then (2) an additional subdirectory named after the augmented SNV-to-gene mapping file. At 
 the bottom of this directory structure are three subdirectories: 
 
-The "annotation" subdirectory contains a table in which each each gene is defined by SNVs mapped to it either exclusively via augmentation (a, that is a for 
-augmentation) or via both mappings (b, that is b for baseline, since the SNV is already mapped to the gene via the minimal SNV-to-gene mapping). This file serves 
-as a reference for any downstream analyses that the user may wish to perform.
+1. The "sumstat" subdirectory. Contains three additional subdirectories, two of which contain intermediate output and can be ignored (namely, "permuted" and 
+"aggregated"), and the other (namely, "original") contains the summary statistics used for the analyses (note: this file is a filtered and reformatted version 
+of the input summary statistics, as generated in step 1 described under the general description heading).
 
-The "scores" subdirectory contains gene scores and gene-set scores according to the baseline SNV-to-gene mapping with unpermuted summary statistics ("baseline"), 
+2. The "annotation" subdirectory. Contains a table in which each each gene is defined by SNVs mapped to it either exclusively via augmentation (a, that is a for 
+augmentation) or via both mappings (b, that is b for baseline, since by definition the SNV is already mapped to the gene via the minimal SNV-to-gene mapping). This 
+file serves as a reference for any downstream analyses that the user may wish to perform.
+
+3. The "scores" subdirectory contains gene scores and gene-set scores according to the baseline SNV-to-gene mapping with unpermuted summary statistics ("baseline"), 
 the augmented SNV-to-gene mapping with unpermuted summary statistics ("augmented"), and the augmented SNV-to-gene mapping with permuted (EPVP) summary statistics 
 ("random"). The intermediate output stored within the "batches" subdirectory (under the "random" subdirectory) can be ignored. Suffixes:<br />
 &nbsp;- Unadjusted gene scores (unadjusted.genes.raw)<br />
