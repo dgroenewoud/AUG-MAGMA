@@ -103,6 +103,24 @@ Optional flags *include*:
 --ignore-genes </path/to/gene-list-file>&nbsp;&nbsp;&nbsp;# define path list of genes to exclude from analyses (see MAGMA manual | default is none)<br />
 --permutations P&nbsp;&nbsp;&nbsp;# set number of permutations P manually (default is 20)<br />
 
+# Output
+
+Run time varies but will usually not exceed 12 hours. Progress can be monitored in the nohup.out file. All output is stored in the specified output directory
+under a subdirectory named (1) after the summary statistics file and then (2) an additional subdirectory named after the augmented SNV-to-gene mapping file. At 
+the bottom of this directory structure are three subdirectories: 
+
+The "annotation" subdirectory contains a table in which each each gene is defined by SNVs mapped to it either via both mappings (b) or exclusively via 
+augmentation (a). This is a useful reference for the user.
+
+The "scores" subdirectory contains gene scores and gene-set scores according to the baseline SNV-to-gene mapping with unpermuted summary statistics ("baseline"), 
+the augmented SNV-to-gene mapping with unpermuted summary statistics ("augmented"), and the augmented SNV-to-gene mapping with permuted (EPVP) summary statistics 
+("random"). The intermediate output stored within the batches subdirectory (under the random subdirectory) can be ignored. The file names are self explanatory. 
+Suffixes:<br />
+&nbsp;- Unadjusted gene scores (unadjusted.genes.raw)<br />
+&nbsp;- Adjusted gene scores (.adjusted.gsa.genes.out)<br />
+&nbsp;- Gene-set scores from competitive gene-set analysis with adjusted gene scores (.adjusted.gsa.out)<br /> 
+
+
 
 
 
