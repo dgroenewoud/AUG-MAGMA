@@ -115,7 +115,7 @@ as a reference for any downstream analyses that the user may wish to perform.
 
 The "scores" subdirectory contains gene scores and gene-set scores according to the baseline SNV-to-gene mapping with unpermuted summary statistics ("baseline"), 
 the augmented SNV-to-gene mapping with unpermuted summary statistics ("augmented"), and the augmented SNV-to-gene mapping with permuted (EPVP) summary statistics 
-("random"). The intermediate output stored within the batches subdirectory (under the random subdirectory) can be ignored. Suffixes:<br />
+("random"). The intermediate output stored within the "batches" subdirectory (under the "random" subdirectory) can be ignored. Suffixes:<br />
 &nbsp;- Unadjusted gene scores (unadjusted.genes.raw)<br />
 &nbsp;- Adjusted gene scores (.adjusted.gsa.genes.out)<br />
 &nbsp;- Gene-set scores from competitive gene-set analysis with adjusted gene scores (.adjusted.gsa.out)<br /> 
