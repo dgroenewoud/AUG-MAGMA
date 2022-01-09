@@ -31,25 +31,26 @@ the benefits of augmentation. To limit spurious discoveries, we control for non-
   (iii) it is also possible to avoid this file completely and to build your own SNV-to-gene mappings directly (however, we currently do not implement this)
 - A gene-set file (for examples, refer to: http://www.gsea-msigdb.org/gsea/downloads.jsp)
 
-# Installation
-- Simply save the Rscript (AUG-MAGMA.R) into any directory of your choice.
-- Create an empty working directory and within it an empty subdirectory called "output". For convenience, we also recommend that you create a subdirectory called
-  "input" (that is, within the working directory), and that you then create five subdirectories within the "input" subdirectory, namely: "annotations" (for gene 
-  locations and SNV-to-gene mappings), "binaries" (for a set of binary files), "miscellaneous" (for an optional text file containing a list of genes to exclude 
-  from the analyses), "sets" (for a gene-set file), and "sumstats" (for a GWAS summary statistics file). 
-  
-  ./workdir/
-           input/
-                annotations/
-                binaries/
-                miscellaneous/
-                sets/
-                sumstats/
-           output/
-
-# Recommendation
+# Prerequisites
 Users should be familiar with MAGMA and we recommend that they refer to the MAGMA manual for additional details. The manual can be downloaded from
 the MAGMA website (https://ctg.cncr.nl/software/magma).
+
+# Installation
+Simply save the Rscript (AUG-MAGMA.R) into any directory of your choice.<br />
+
+Create an empty working directory and, within it, an empty subdirectory called "output". For convenience, we recommend that you also create a subdirectory called
+"input" (within the working directory, that is), and that you create five subdirectories within it, namely: "annotations" (for gene locations and SNV-to-gene 
+mappings), "binaries" (for a set of binary files), "miscellaneous" (for an optional file containing a list of genes to exclude from the analyses), "sets" (for
+a gene-set file), and "sumstats" (for a GWAS summary statistics file). 
+  
+./workdir/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;input/<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;annotations/<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binaries/<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;miscellaneous/<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sets/<br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sumstats/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output/<br />
 
 # Tutorial
 Stage 1. We recommend the following tutorial for first-time use in order to confirm that everything is running as it should. Let us examine the effect of 
