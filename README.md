@@ -4,10 +4,10 @@ A controlled approach for incorporating regulatory interactions into gene-set an
 When using our approach, we ask that you reference our publication as well:
 
 # Background
-We provide an Rscript to execute gene scoring and gene-set analysis with MAGMA with the specific aim of comparing between a baseline SNV-to-gene mapping (that 
-is, a minimal SNV-to-gene mapping) and an augmented SNV-to-gene mapping (that is, a SNV-to-gene mapping that is built on-top-of a baseline SNV-to-gene mapping). 
-For each mapping, MAGMA (a popular gene-set analysis tool for GWAS data: https://doi.org/10.1371/journal.pcbi.1004219) is used to calculate gene scores based on 
-SNV-level associations (from GWAS summary statistics) amongst SNVs mapped to each gene. These gene scores are then fed into a competitive gene-set analysis to 
+We provide an Rscript (current version: AUG-MAGMA-V1.01.R) to execute gene scoring and gene-set analysis with MAGMA with the specific aim of comparing between a baseline 
+SNV-to-gene mapping (that is, a minimal SNV-to-gene mapping) and an augmented SNV-to-gene mapping (that is, a SNV-to-gene mapping that is built on-top-of a baseline SNV-to-
+gene mapping). For each mapping, MAGMA (a popular gene-set analysis tool for GWAS data: https://doi.org/10.1371/journal.pcbi.1004219) is used to calculate gene scores
+based on SNV-level associations (from GWAS summary statistics) amongst SNVs mapped to each gene. These gene scores are then fed into a competitive gene-set analysis to 
 identify collections of genes that are enriched for phenotype association. Gene scores and gene-set scores can be compared between both mappings to evaluate 
 the benefits of augmentation. To limit spurious discoveries, we control for non-specific effects with matched, random augmentation (see publication for details).
 
