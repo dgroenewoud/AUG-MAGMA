@@ -3,6 +3,9 @@ A controlled approach for incorporating regulatory interactions into gene-set an
 
 When using our approach, we ask that you reference our publication as well:
 
+Groenewoud D, Shye A, Elkon R. Incorporating regulatory interactions into gene-set analyses for GWAS data: a controlled analysis with the MAGMA tool. 
+[accepted for publication in PLOS Computational Biology]
+
 # Background
 We provide an Rscript (current version: AUG-MAGMA-V1.01.R) to execute gene scoring and gene-set analysis with MAGMA with the specific aim of comparing between a baseline 
 SNV-to-gene mapping (that is, a minimal SNV-to-gene mapping) and an augmented SNV-to-gene mapping (that is, a SNV-to-gene mapping that is built on-top-of a baseline SNV-to-
